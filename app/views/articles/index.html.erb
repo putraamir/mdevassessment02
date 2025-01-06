@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Title Aggregator" %>
+
+<h1>Title Aggregator (Verge)</h1>
+
+<div>
+    <% @articles.each do |article| %>
+      <div class="article">
+        <a href="<%= article.url %>" target="_blank"><%= article.title %></a> 
+        <% if article.published_at != "" %> | <% end %>
+        <small><%= article.published_at.strftime("%B %d, %Y at %I:%M %p") %></small>
+      </div>
+    <% end %>
+  </div>

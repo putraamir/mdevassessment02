@@ -10,16 +10,15 @@ namespace :scrape do
 
     doc.css("*.duet--content-cards--content-card").each do |link|
       title = link.css("h2 a").text.strip
-      author = link.css("a.text-gray-31").text.strip
+
       href = link.css("h2 a").attr("href")&.value
       url = "https://www.theverge.com#{href}"
-      date_str = link.css("time").text.strip
 
-  published_at = get_article_date(url) || parse_date(date_str)
+      date_str = link.css("time").text.strip
+      published_at = get_article_date(url) || parse_date(date_str)
 
       @article = Article.find_or_create_by(
         title: title,
-        author: author,
         url: url,
         published_at: published_at
       )
